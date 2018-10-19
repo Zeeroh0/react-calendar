@@ -1,13 +1,16 @@
 import React from "react";
 import dateFns from "date-fns";
 
+
+import Event from './Event';
+
 class Calendar extends React.Component {
   state = {
     currentMonth: new Date(),
     selectedDate: new Date()
   };
 
-  renderHeader() {
+  renderHeader = () => {
     const dateFormat = "MMMM YYYY";
 
     return (
@@ -27,7 +30,7 @@ class Calendar extends React.Component {
     );
   }
 
-  renderDays() {
+  renderDays = () => {
     const dateFormat = "dddd";
     const days = [];
 
@@ -44,7 +47,7 @@ class Calendar extends React.Component {
     return <div className="days row">{days}</div>;
   }
 
-  renderCells() {
+  renderCells = () => {
     const { currentMonth, selectedDate } = this.state;
     const monthStart = dateFns.startOfMonth(currentMonth);    // Gets month's last day
     const monthEnd = dateFns.endOfMonth(monthStart);          // Gets month's first day
@@ -57,17 +60,31 @@ class Calendar extends React.Component {
     let days = [];
     let day = startDate;
     let formattedDate = "";
-    debugger
 
     while (day <= endDate) {
-      debugger;
       for (let i = 0; i < 7; i++) {
-        debugger;
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
         const cellAdditionalClass = !dateFns.isSameMonth(day, monthStart) ? "disabled"
           : dateFns.isSameDay(day, selectedDate) ? "selected"
           : "";
+        const eventComponents = this.props.events.map(
+          (event) => {
+            const isEqual = dateFns.isEqual(cloneDay, event.date);
+            if (isEqual) {
+              return (
+                <Event
+                  title={event.title}
+                  date={event.date}
+                />
+              );
+            } else {
+              return undefined;
+            }
+          }
+        );
+        // debugger
+
         days.push(
           <div
             className={`col cell ${cellAdditionalClass}`}
@@ -76,11 +93,27 @@ class Calendar extends React.Component {
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
+            
+            {/*
+              If there's an event w the same date as this cloneDay value, add an eventEntry
+
+              Loop thru the array of entries.  
+              Check each entry's data value.
+              If its date matches this day's date, render an Event component
+            */}
+
+            <div className="events">{eventComponents}</div>
+
+            {
+              eventComponents ? 
+              <div className="events">{eventComponents}</div>
+              : undefined
+            }
+
           </div>
         );
         day = dateFns.addDays(day, 1);
       }
-      debugger;
       rows.push(
         <div className="row" key={day}>
           {days}
@@ -89,7 +122,6 @@ class Calendar extends React.Component {
       days = [];
     }
 
-    debugger;
     return <div className="body">{rows}</div>;
   }
 
