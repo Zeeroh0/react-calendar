@@ -2,10 +2,10 @@ import React from "react";
 import dateFns from "date-fns";
 
 import Calendar from "./components/Calendar";
-
 import "./App.scss";
 
 
+// Dummy Data
 const events = [
   { title: 'Event 0', date: 'Sep 30, 2018', subtitle: 'Subtitle 0', dimIcType: '1' },
   { title: 'Event 1', date: '10/01/2018', subtitle: 'Subtitle 1', dimIcType: '2' },
@@ -16,6 +16,7 @@ const events = [
   { title: 'Event 6', date: '2018-11-03T00:00:00', subtitle: 'Subtitle 6', dimIcType: '1' },
 ];
 
+// Data preprocessing
 const styledEvents = events.map(
   event => {
     
@@ -38,6 +39,7 @@ const styledEvents = events.map(
   }
 );
 
+// Implementation
 class App extends React.Component {
   render() {
     return (
