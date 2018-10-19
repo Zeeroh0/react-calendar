@@ -68,20 +68,9 @@ class Calendar extends React.Component {
         const cellAdditionalClass = !dateFns.isSameMonth(day, monthStart) ? "disabled"
           : dateFns.isSameDay(day, selectedDate) ? "selected"
           : "";
+        
         const eventComponents = this.props.events.map(
-          (event) => {
-            const isEqual = dateFns.isEqual(cloneDay, event.date);
-            if (isEqual) {
-              return (
-                <Event
-                  title={event.title}
-                  date={event.date}
-                />
-              );
-            } else {
-              return undefined;
-            }
-          }
+          (e, i) => dateFns.isEqual(cloneDay, e.date) ? <Event key={i} title={e.title} date={e.title} onClick={e.onClick} style={e.style} /> : null
         );
         // debugger
 
@@ -93,23 +82,7 @@ class Calendar extends React.Component {
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
-            
-            {/*
-              If there's an event w the same date as this cloneDay value, add an eventEntry
-
-              Loop thru the array of entries.  
-              Check each entry's data value.
-              If its date matches this day's date, render an Event component
-            */}
-
             <div className="events">{eventComponents}</div>
-
-            {
-              eventComponents ? 
-              <div className="events">{eventComponents}</div>
-              : undefined
-            }
-
           </div>
         );
         day = dateFns.addDays(day, 1);

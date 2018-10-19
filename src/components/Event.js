@@ -1,13 +1,16 @@
 import React from 'react';
-import dateFns from "date-fns";
 
 
-const Event = ({ title, date, icDimType }) => {
+const Event = ({ title, date, onClick, className='', style={} }) => {
 
   // Figure out color coding based off of icDimType
   
   return (
-    <div className='event' onClick={() => alert(`Clicked on ${title} which occurs on ${dateFns.format(date, 'MMM Do')}`)} >
+    <div
+      className={`${className} event`}
+      style={{ textDecoration:'italic', ...style }}
+      onClick={onClick}
+    >
       <div className="title">{title}</div>
     </div>
   );
