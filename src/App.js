@@ -1,8 +1,8 @@
 import React from "react";
 import dateFns from "date-fns";
 
-import Calendar from "./components/Calendar";
-import "./App.scss";
+import { Calendar } from "./components";
+import "./styles.scss";
 
 
 // Dummy Data

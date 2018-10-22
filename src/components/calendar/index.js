@@ -1,7 +1,7 @@
 import React from "react";
 import dateFns from "date-fns";
 
-import Event from './Event';
+import Event from '../event';
 
 
 class Calendar extends React.Component {
