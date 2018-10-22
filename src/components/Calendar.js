@@ -1,8 +1,8 @@
 import React from "react";
 import dateFns from "date-fns";
 
-
 import Event from './Event';
+
 
 class Calendar extends React.Component {
   state = {
@@ -102,19 +102,19 @@ class Calendar extends React.Component {
     this.setState({
       selectedDate: day
     });
-  };
+  }
 
   nextMonth = () => {
     this.setState({
       currentMonth: dateFns.addMonths(this.state.currentMonth, 1)
     });
-  };
+  }
 
   prevMonth = () => {
     this.setState({
       currentMonth: dateFns.subMonths(this.state.currentMonth, 1)
     });
-  };
+  }
 
   render() {
     return (

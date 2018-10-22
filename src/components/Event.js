@@ -2,8 +2,6 @@ import React from 'react';
 
 
 const Event = ({ title, date, onClick, className='', style={} }) => {
-
-  // Figure out color coding based off of icDimType
   
   return (
     <div
